@@ -34,7 +34,6 @@ const FlashcardComponent: React.FC<FlashcardComponentProps> = ({
             />
           </svg>
         </button>
-
         <div
           className={cn(styles.flashcard, {
             [styles.flipped]: isFlipped,
@@ -44,23 +43,17 @@ const FlashcardComponent: React.FC<FlashcardComponentProps> = ({
           <div className={styles.flashcardInner}>
             <div className={styles.flashcardFront}>
               <div className={styles.cardLabel}>Question</div>
-              <div className={styles.cardContent}>
-                {flashcard.question}
-              </div>
+              <div className={styles.cardContent}>{flashcard.question}</div>
               <div className={styles.cardHint}>Click to flip</div>
             </div>
-
             <div className={styles.flashcardBack}>
               <div className={styles.cardLabel}>Answer</div>
-              <div className={styles.cardContent}>
-                {flashcard.answer}
-              </div>
+              <div className={styles.cardContent}>{flashcard.answer}</div>
               <div className={styles.cardHint}>Click to flip back</div>
             </div>
           </div>
         </div>
       </div>
-
       <ConfirmDeleteModal
         isOpen={showDeleteModal}
         onConfirm={() =>
