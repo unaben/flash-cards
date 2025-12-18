@@ -17,9 +17,6 @@ export default function Home() {
   );
   const [showCreateForm, setShowCreateForm] = useState(false);
 
-  // console.log('main state:', flashcards);
-  
-
   return (
     <div className={styles.container}>
       <header className={styles.header}>
@@ -46,10 +43,10 @@ export default function Home() {
       </div>
 
       {flashcards.length === 0 ? (
-        <div className="emptyState">
-          <div className="emptyIcon">📚</div>
-          <h2 className="emptyTitle">No flashcards yet</h2>
-          <p className="emptyText">
+        <div className={styles.emptyState}>
+          <div className={styles.emptyIcon}>📚</div>
+          <h2 className={styles.emptyTitle}>No flashcards yet</h2>
+          <p className={styles.emptyText}>
             Click the &quot;Create Flashcard&quot; button to get started!
           </p>
         </div>

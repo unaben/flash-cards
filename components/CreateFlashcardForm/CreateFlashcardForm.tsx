@@ -2,22 +2,21 @@
 
 import { useState } from "react";
 import type { CreateFlashcardFormProps } from "./CreateFlashcardForm.types";
+import { Flashcard } from "@/types/interface";
+import { handleInputChange } from "@/utils/handleInputChange";
+import { handleSubmit } from "@/utils/handleSubmit";
 import styles from "./CreateFlashcardForm.module.css";
 
 const CreateFlashcardForm: React.FC<CreateFlashcardFormProps> = ({
   onSubmit,
   onCancel,
 }) => {
-  const [question, setQuestion] = useState<string>("");
-  const [answer, setAnswer] = useState<string>("");
+  const [formData, setFormData] = useState<Omit<Flashcard, "id">>({
+    question: "",
+    answer: "",
+  });
 
-  const handleSubmit = () => {
-    if (question.trim() && answer.trim()) {
-      onSubmit(question, answer);
-      setQuestion("");
-      setAnswer("");
-    }
-  };
+  const { question, answer } = formData;
 
   return (
     <div className={styles.form}>
@@ -30,7 +29,8 @@ const CreateFlashcardForm: React.FC<CreateFlashcardFormProps> = ({
           id="question"
           className={styles.textarea}
           value={question}
-          onChange={(e) => setQuestion(e.target.value)}
+          name="question"
+          onChange={(e) => handleInputChange(e, setFormData)}
           placeholder="Enter your question..."
           rows={3}
           required
@@ -44,7 +44,8 @@ const CreateFlashcardForm: React.FC<CreateFlashcardFormProps> = ({
           id="answer"
           className={styles.textarea}
           value={answer}
-          onChange={(e) => setAnswer(e.target.value)}
+          name="answer"
+          onChange={(e) => handleInputChange(e, setFormData)}
           placeholder="Enter the answer..."
           rows={3}
           required
@@ -54,7 +55,10 @@ const CreateFlashcardForm: React.FC<CreateFlashcardFormProps> = ({
         <button className={styles.btnSecondary} onClick={onCancel}>
           Cancel
         </button>
-        <button className={styles.btnPrimary} onClick={handleSubmit}>
+        <button
+          className={styles.btnPrimary}
+          onClick={() => handleSubmit(question, answer, onSubmit, setFormData)}
+        >
           Create
         </button>
       </div>
